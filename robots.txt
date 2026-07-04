@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://t3b04-mg-coin-sale.node-link.shop/sitemap.xml
+Sitemap: https://magok-coin-deal.node-link.shop/sitemap.xml
