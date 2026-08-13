@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글 목록 (3/3) · t3b04-mg-coin-sale</title>
+  <meta name="description" content="t3b04-mg-coin-sale에 올라온 글 목록입니다.">
+  <link rel="canonical" href="https://magok-coin-deal.node-link.shop/posts-3.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+        :root {
+            --bg-color: #090a0f;
+            --main-gradient: linear-gradient(180deg, #090a0f 0%, #111827 100%);
+            --card-surface: rgba(255, 255, 255, 0.02);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --text-high: #f3f4f6;
+            --text-low: #9ca3af;
+            --neon-amber: #f59e0b;
+            --glow: rgba(245, 158, 11, 0.12);
+            --font-serif: 'Gowun Batang', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--main-gradient);
+            color: var(--text-high);
+            font-family: var(--font-serif);
+            line-height: 1.85;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 90px 24px;
+            width: 100%;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .blog-header::after {
+            content: '';
+            display: block;
+            width: 35px;
+            height: 1px;
+            background: var(--neon-amber);
+            margin: 20px auto 0;
+            opacity: 0.4;
+            box-shadow: 0 0 6px var(--neon-amber);
+        }
+
+        .blog-sub {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--neon-amber);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.45;
+            letter-spacing: -0.01em;
+        }
+
+        .blog-date {
+            font-size: 0.85rem;
+            color: var(--text-low);
+            margin-top: 10px;
+            font-family: var(--font-sans);
+        }
+
+        .essay-content {
+            font-size: 1.08rem;
+            color: var(--text-high);
+            text-align: justify;
+        }
+
+        .essay-p {
+            margin-bottom: 28px;
+            text-indent: 10px;
+        }
+
+        .highlight-quote {
+            background: var(--card-surface);
+            border-left: 2px solid var(--neon-amber);
+            padding: 20px 24px;
+            margin: 36px 0;
+            border-radius: 0 8px 8px 0;
+            backdrop-filter: blur(8px);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quote-inner {
+            font-style: italic;
+            color: #fffbeb;
+            font-size: 1.02rem;
+        }
+
+        .comments {
+            margin-top: 75px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+        }
+
+        .comments-label {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--neon-amber);
+            letter-spacing: 0.12em;
+            margin-bottom: 22px;
+            text-transform: uppercase;
+        }
+
+        .comment-node {
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .comment-node:hover {
+            border-color: rgba(245, 158, 11, 0.22);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+        }
+
+        .author-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .post-time {
+            color: var(--text-low);
+        }
+
+        .stars {
+            color: var(--neon-amber);
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+
+        .text-body {
+            font-size: 0.92rem;
+            color: var(--text-high);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 35px 24px;
+            border-top: 1px solid var(--border-color);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--text-low);
+            letter-spacing: 0.05em;
+        }
+
+        .amber-glow {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .blog-title {
+                font-size: 1.55rem;
+            }
+
+            .essay-content {
+                font-size: 1.02rem;
+            }
+        }
+    </style>
+  <meta property="og:title" content="글 목록 (3/3) · t3b04-mg-coin-sale">
+  <meta property="og:description" content="t3b04-mg-coin-sale에 올라온 글 목록입니다.">
+  <meta property="og:url" content="https://magok-coin-deal.node-link.shop/posts-3.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <div class="container">
+    <header class="blog-header">
+            <div class="amber-glow"></div>
+            <div class="blog-sub">MODERN CITY MONOLOGUE</div>
+            <div class="blog-title">첨단 단지 유리 빌딩 숲에서 울리는 가벼운 웃음의 조각</div>
+            <div class="blog-date">2026. 05. 27</div>
+        </header>
+    <main>
+      <h1>글 목록</h1>
+      <p>전체 49개 · 3/3 페이지</p>
+      <ul class="post-list">
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-2.html">마곡 코인노래방 할인 안내</a>
+        <p class="post-item__summary">코인노래방은 음원 한 곡당 결제를 하는 방식으로 운영되는 노래방입니다. 마곡 지역에서도 여러 코인노래방이 운영 중이며, 할인 정보는 각 업소의 방침이나 계절·이벤트에 따라 달라질 수 있습니다. 할인</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-3.html">마곡 코인노래방 할인 정보 안내</a>
+        <p class="post-item__summary">마곡 지역에 위치한 코인노래방은 최근 다양한 할인 이벤트를 통해 이용 고객들의 접근성을 높이고 있습니다. 특히 직장인이나 학생층을 대상으로 한 시간대별 할인은 저녁 시간대 이용 부담을 줄이는 데 큰</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/qa-001-vnl9b4.html">마곡 코인노래방 할인 처음 알아볼 때 실제로 많이 묻는 질문 5가지</a>
+        <p class="post-item__summary">마곡 지역에서 코인노래방을 처음 이용하려는 분들이 가장 많이 묻는 질문은 할인 혜택이 어떤 조건으로 제공되는지입니다. 일반적으로 평일 오후 시간대나 특정 요일에 기본 요금에서 일정 비율이 차감되며,</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/qa-002-1cqt25h.html">마곡 코인노래방 할인</a>
+        <p class="post-item__summary">마곡 지역에서 코인노래방을 이용할 때 가장 많이 적용되는 할인 방식은 시간대별 요금 차등입니다.</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/qa-002-1kel089.html">마곡 코인노래방 할인 처음 알아볼 때 실제로 많이 묻는 질문 5가지</a>
+        <p class="post-item__summary">아, 진짜.. 다크소울 1편 출시 전 데모 버전에서만 존재했던 지역과 적 배치의 차이. 이 문제를 해결하는 과정에서 발견된 미사용 모델이 실제 게임 파일에서 어떤 의도로 기획되었는지에 대한 학습 데</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/qa-002-9i2sao.html">마곡 코인노래방 할인</a>
+        <p class="post-item__summary">마곡 지구는 최신 시설을 갖춘 코인노래방이 밀집해 있어 많은 분이 즐겨 찾는 문화 공간입니다. 일상 속 스트레스를 해소하고 친구나 가족과 함께 즐거운 시간을 보내기에 더할 나위 없이 좋은 장소입니다</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/review-001-1r073n3.html">마곡 코인노래방 할인 솔직 후기</a>
+        <p class="post-item__summary">마곡 지역에서 코인노래방을 자주 찾는 사람이라면 누구나 조금 더 저렴하게 이용할 수 있는 방법에 관심을 두기 마련입니다. 최근 이 지역의 코인노래방들은 다양한 할인 정책과 정액 요금제를 통해 이용객</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/review-001.html">마곡역 3 번 출구 지하, 코인노래방 할인 코드가 먹히는 유일한 시간대</a>
+        <p class="post-item__summary">IMDB 평점 3 점대인 B 급 컬트 영화 (2009) 의 디랙터스 컷 버전에서만 발견되는 0.04 초의 점멸 오류를 분석하던 밤이었다. 타이틀롤이 지나가고 주인공이 현관문을 여는 순간, 배경의 벽</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/review-002.html">프레임 단위로 짤린 미사용 보스와 마곡역 지하의 이상한 공명 주파수</a>
+        <p class="post-item__summary">패치 1.03 이전 빌드에서 확인된 '신비로운 전사 (Mystic Warrior)' 데이터는 단순한 컷이 아니다. 히트박스 판정이 프레임 14 에서 15 로 넘어가는 순간 무효화되는 설계 오류 때문</p>
+      </li>
+      </ul>
+    <nav class="pager">
+      <a class="pager__link" href="posts.html">1</a>
+      <a class="pager__link" href="posts-2.html">2</a>
+      <span class="pager__current">3</span>
+    </nav>
+    </main>
+  </div>
+</body>
+</html>

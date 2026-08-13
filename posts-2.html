@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글 목록 (2/3) · t3b04-mg-coin-sale</title>
+  <meta name="description" content="t3b04-mg-coin-sale에 올라온 글 목록입니다.">
+  <link rel="canonical" href="https://magok-coin-deal.node-link.shop/posts-2.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+        :root {
+            --bg-color: #090a0f;
+            --main-gradient: linear-gradient(180deg, #090a0f 0%, #111827 100%);
+            --card-surface: rgba(255, 255, 255, 0.02);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --text-high: #f3f4f6;
+            --text-low: #9ca3af;
+            --neon-amber: #f59e0b;
+            --glow: rgba(245, 158, 11, 0.12);
+            --font-serif: 'Gowun Batang', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--main-gradient);
+            color: var(--text-high);
+            font-family: var(--font-serif);
+            line-height: 1.85;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 90px 24px;
+            width: 100%;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .blog-header::after {
+            content: '';
+            display: block;
+            width: 35px;
+            height: 1px;
+            background: var(--neon-amber);
+            margin: 20px auto 0;
+            opacity: 0.4;
+            box-shadow: 0 0 6px var(--neon-amber);
+        }
+
+        .blog-sub {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--neon-amber);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.45;
+            letter-spacing: -0.01em;
+        }
+
+        .blog-date {
+            font-size: 0.85rem;
+            color: var(--text-low);
+            margin-top: 10px;
+            font-family: var(--font-sans);
+        }
+
+        .essay-content {
+            font-size: 1.08rem;
+            color: var(--text-high);
+            text-align: justify;
+        }
+
+        .essay-p {
+            margin-bottom: 28px;
+            text-indent: 10px;
+        }
+
+        .highlight-quote {
+            background: var(--card-surface);
+            border-left: 2px solid var(--neon-amber);
+            padding: 20px 24px;
+            margin: 36px 0;
+            border-radius: 0 8px 8px 0;
+            backdrop-filter: blur(8px);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quote-inner {
+            font-style: italic;
+            color: #fffbeb;
+            font-size: 1.02rem;
+        }
+
+        .comments {
+            margin-top: 75px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+        }
+
+        .comments-label {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--neon-amber);
+            letter-spacing: 0.12em;
+            margin-bottom: 22px;
+            text-transform: uppercase;
+        }
+
+        .comment-node {
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .comment-node:hover {
+            border-color: rgba(245, 158, 11, 0.22);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+        }
+
+        .author-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .post-time {
+            color: var(--text-low);
+        }
+
+        .stars {
+            color: var(--neon-amber);
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+
+        .text-body {
+            font-size: 0.92rem;
+            color: var(--text-high);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 35px 24px;
+            border-top: 1px solid var(--border-color);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--text-low);
+            letter-spacing: 0.05em;
+        }
+
+        .amber-glow {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .blog-title {
+                font-size: 1.55rem;
+            }
+
+            .essay-content {
+                font-size: 1.02rem;
+            }
+        }
+    </style>
+  <meta property="og:title" content="글 목록 (2/3) · t3b04-mg-coin-sale">
+  <meta property="og:description" content="t3b04-mg-coin-sale에 올라온 글 목록입니다.">
+  <meta property="og:url" content="https://magok-coin-deal.node-link.shop/posts-2.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <div class="container">
+    <header class="blog-header">
+            <div class="amber-glow"></div>
+            <div class="blog-sub">MODERN CITY MONOLOGUE</div>
+            <div class="blog-title">첨단 단지 유리 빌딩 숲에서 울리는 가벼운 웃음의 조각</div>
+            <div class="blog-date">2026. 05. 27</div>
+        </header>
+    <main>
+      <h1>글 목록</h1>
+      <p>전체 49개 · 2/3 페이지</p>
+      <ul class="post-list">
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0211.html">마곡 코인노래방 할인 찾아 합정 노래방 추천정보 확인하기</a>
+        <p class="post-item__summary">쾌적한 환경, 최신 음향 시스템, 그리고 합리적인 가격대까지 이 세 가지가 완벽하게 충족될 때 비로소 즐거운 시간을 보낼 수 있습니다. 단순히 마곡 코인노래방 할인 정보를 검색하다가 합정까지 눈을 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0212.html">마곡 코인노래방 할인 찾다 연남 클럽 추천정보 비교법</a>
+        <p class="post-item__summary">오늘 밤 특별한 시간을 보내고 싶어 정보를 찾고 계신가요? 혹시 무심코 마곡 코인노래방 할인 정보만을 검색하다가 더 역동적인 공간인 클럽으로 관심을 돌리게 된 것은 아닌지 궁금합니다. 어떤 스타일의</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0213.html">마곡 코인노래방 할인 혜택 확인하고 알아보는 합정 셔츠룸 추천정보</a>
+        <p class="post-item__summary">마곡 코인노래방 할인 정보를 찾던 분들이라면 이제는 더 넓은 영역의 유흥 문화를 탐색할 준비가 되셨을 것입니다. 특히 합정 지역에서 셔츠룸을 이용할 때는 단순한 검색보다는 체계적인 확인 절차가 필요</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0214.html">마곡 코인노래방 할인 정보 확인 후 살펴보는 공덕 가라오케 추천정보</a>
+        <p class="post-item__summary">마곡 코인노래방 할인 혜택을 챙기는 꼼꼼함은 다른 유흥 시설을 찾을 때도 큰 도움이 됩니다. 공덕 지역에서 가라오케를 선택할 때는 크게 두 가지 유형의 업체로 나뉩니다. 고급스러운 시설을 강조하는 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0215.html">마곡 코인노래방 할인 팁 활용하고 상수 마사지 추천정보 얻기</a>
+        <p class="post-item__summary">마곡 코인노래방 할인 혜택을 찾는 과정이 익숙하다면, 이제는 건강한 휴식을 위한 마사지 샵 예약에도 그 노하우를 발휘할 때입니다. 많은 분이 상수 지역에서 마사지를 예약할 때 가장 먼저 실패하는 지</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0216.html">마곡 코인노래방 할인 찾듯 망원 노래방 추천정보 꼼꼼하게 살피기</a>
+        <p class="post-item__summary">마곡 코인노래방 할인 기회를 찾는 것처럼, 망원 지역에서 노래방을 선택할 때도 체크리스트를 활용하는 것이 중요합니다. 특히 접근성은 모임의 즐거움을 결정짓는 중요한 요소입니다. 역에서 도보로 얼마나</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0217.html">마곡 코인노래방 할인 혜택보다 중요한 홍대 노래방 추천정보 확인하기</a>
+        <p class="post-item__summary">친구들과 저녁 식사를 마치고 소화도 시킬 겸 자연스럽게 찾게 되는 곳이 바로 노래방입니다. 최근에는 마곡 코인노래방 할인 정보를 검색하며 알뜰한 이용을 계획하는 분들이 많지만, 홍대와 같이 번화한 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0218.html">마곡 코인노래방 할인 찾는다면 알아야 할 공덕 셔츠룸 추천정보 정리</a>
+        <p class="post-item__summary">셔츠룸은 무조건 비싸고 부담스럽다는 인식이 있지만, 사실은 방문하는 시간대에 따라 전혀 다른 이용 경험을 할 수 있습니다. 마곡 코인노래방 할인 소식을 찾는 분들이 오히려 셔츠룸의 가격 체계를 오해</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0219.html">마곡 코인노래방 할인 만큼 중요한 연남 유흥 추천정보 및 인원 구성 팁</a>
+        <p class="post-item__summary">성공적인 밤 문화를 즐기기 위해서는 장소의 분위기, 예산, 그리고 무엇보다 중요한 인원 구성이 완벽하게 맞아떨어져야 합니다. 마곡 코인노래방 할인 정보를 검색하던 분들이라면 연남 지역의 다채로운 시</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0220.html">마곡 코인노래방 할인 정보만 보나요? 마곡 가라오케 추천정보 비교 기준</a>
+        <p class="post-item__summary">혹시 오늘 밤을 어디서 보낼지 고민하며 가격 비교 사이트만 들여다보고 계시진 않나요? 단순히 마곡 코인노래방 할인 혜택을 찾는 것보다 가라오케를 선택할 때는 훨씬 더 세밀한 기준이 필요합니다. 업체</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/guide-001-1ynxzyv.html">코인노래방 해결 방법 총정리</a>
+        <p class="post-item__summary">마곡 지역에서 즐거운 여가 시간을 보내기 위해 코인노래방을 찾는 분들이 많아지고 있습니다. 최근의 코인노래방은 과거와 달리 청결한 시설과 고성능 음향 장비를 갖추고 있어 누구나 부담 없이 방문하기 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/guide-001-w3ey35.html">코인노래방 해결 방법 총정리</a>
+        <p class="post-item__summary">마곡 지역에서 코인노래방을 방문할 때는 먼저 운영 시간과 이용 인원 제한을 확인하는 것이 중요합니다. 대부분의 매장은 오전 일찍부터 새벽까지 영업하며, 혼잡 시간대에는 대기 시간이 길어질 수 있으므</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/interview-002-4bxo1.html">마곡 코인노래방 할인 경험자에게 물어본 현실적인 판단 기준</a>
+        <p class="post-item__summary">아, 진짜... 데이터 과학자가 되면 어떤 일이 일어날지 궁금해. 이번 글은 MK울트라 프로젝트의 1972년 의회 청문회에서 공개되지 않은 서브프로젝트 3건의 실제 코드명과 목적을 특정 키워드의 구</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/interview-002-hrz71w.html">마곡 코인노래방 할인</a>
+        <p class="post-item__summary">마곡 지구는 최근 많은 직장인과 거주민이 밀집하면서 다양한 여가 시설이 들어서고 있습니다. 그중에서도 간편하게 스트레스를 해소할 수 있는 코인노래방은 퇴근길이나 주말에 많은 분이 찾는 인기 장소입니</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/juice-1.html">마곡 코인노래방 할인 정보</a>
+        <p class="post-item__summary">마곡 지역에서 코인노래방을 찾을 때 할인의 의미는 단순한 가격 인하를 넘어섭니다. 코인노래방은 시간 단위 요금제가 일반적이므로, 할인 정보가 있는 곳을 확인하면 비용 계획을 세우는 데 도움이 됩니다</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/juice-2.html">마곡 코인노래방 할인 정보</a>
+        <p class="post-item__summary">마곡 지역의 코인노래방은 주로 오전 시간대와 평일 주간을 중심으로 할인가가 적용되는 구조로 운영됩니다. 일부 업소는 출근 전이나 낮 시간대를 활용해 비용을 절감할 수 있는 요금제를 시행하고 있으며,</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/myth-001-13ocjuf.html">마곡 코인노래방 할인에 관한 흔한 오해, 직접 확인해보니 달랐던 점</a>
+        <p class="post-item__summary">마곡 지역에서 코인노래방을 찾는 분들이 가장 먼저 확인하는 정보 중 하나가 바로 할인 혜택입니다. 많은 이용객이 인터넷 검색을 통해 특정 시간대나 요일에 가면 가격을 깎아줄 것이라고 기대하곤 합니다</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/myth-001-4bxo1.html">마곡 코인노래방 할인에 관한 흔한 오해, 직접 확인해보니 달랐던 점</a>
+        <p class="post-item__summary">마곡 지역에서 코인노래방 할인에 대한 정보가 인터넷에 많이 퍼져 있지만, 실제 운영 방식과 차이가 있는 경우가 많습니다. 많은 이용자가 할인 쿠폰이나 시간제 요금만 보고 방문했다가 예상과 다른 요금</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/myth-002-11i7q1p.html">마곡 코인노래방 할인에 관한 흔한 오해, 직접 확인해보니 달랐던 점</a>
+        <p class="post-item__summary">마곡 지역에서 여가 생활을 즐기는 사람들이 많아지면서 코인노래방을 찾는 발길도 끊이지 않고 있습니다. 많은 이용객이 방문 전 가장 먼저 검색하는 것이 바로 마곡 코인노래방 할인 정보입니다. 하지만 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-1.html">마곡 코인노래방 할인 안내</a>
+        <p class="post-item__summary">마곡 지역의 코인노래방은 시간에 따라 할인가가 적용되는 경우가 많으므로, 방문 전 할인 여부를 확인하는 것이 효율적입니다. 코인노래방은 이용 요금을 시간 단위 또는 곡 단위로 산정하는 형태로, 여러</p>
+      </li>
+      </ul>
+    <nav class="pager">
+      <a class="pager__link" href="posts.html">1</a>
+      <span class="pager__current">2</span>
+      <a class="pager__link" href="posts-3.html">3</a>
+    </nav>
+    </main>
+  </div>
+</body>
+</html>
